@@ -1,0 +1,57 @@
+/* Title Section */
+
+#title {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#title .container-fluid {
+  padding-bottom: 0;
+}
+
+.row-title {
+  padding: 10% 0 0;
+  margin-top: 20%;
+}
+
+/* Content Section */
+
+.p-datetime {
+  color: #C8C6C6;
+  margin-bottom: 2rem;
+}
+
+.p-content {
+  text-align: justify;
+  margin-bottom: 1rem;
+}
+
+.p-upvote {
+  color: #C8C6C6;
+  margin-top: 2rem;
+  margin-bottom: 0;
+}
+
+/* Recommendations Section */
+
+.box-recommendations {
+  padding: 1rem 1.5rem;
+}
+
+.img-recommendations {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.h-recommendations {
+  font-size: 1rem;
+}
+
+@media (max-width: 991px) {
+  .box-recommendations {
+    text-align: center;
+  }
+}

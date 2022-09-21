@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Wall | Posts</title>
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Raleway:wght@600;700&display=swap">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js"></script>
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <link rel="stylesheet" href="../static/css/styles-general.css">
+  <link rel="stylesheet" href="../static/css/styles-posts.css">
+  <!-- JS -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Title Section -->
+  <section id="title">
+    <div class="container-fluid">
+      <!-- Nav Bar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+        <a class="navbar-brand" href="{{ url_for('home') }}">The Wall</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('our_story') }}">Our Story</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#top">Top</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#latest">Latest</a>
+            </li>
+            <button type="button" class="btn btn-dark btn-sm rounded-pill">Get Started</button>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </section>
+  <!-- Top Section -->
+  <section id="top">
+    <div class="container-fluid">
+      <h1 class="h-section">Top</h1>
+      <div class="row">
+        <a href="{{ url_for('single_post', post_id=top_3_posts[0]['id']) }}" class="col-lg-4 box-top">
+          <img src="data:image/jpg;base64, {{ top_3_posts[0]['image'] }}" class="d-block img-top">
+          <h2 class="h-top">{{ top_3_posts[0]['title'] }}</h2>
+          <p>{{ top_3_posts[0]['subtitle'] }}</p>
+          <p class="d-inline-block p-datetime">{{ top_3_posts[0]['date'] }}</p>
+          <p class="d-inline-block p-upvote"><i class="fa-solid fa-angle-up"></i> {{ top_3_posts[0]['upvote'] }}</p>
+        </a>
+        <a href="{{ url_for('single_post', post_id=top_3_posts[1]['id']) }}" class="col-lg-4 box-top">
+          <img src="data:image/jpg;base64, {{ top_3_posts[1]['image'] }}" class="d-block img-top">
+          <h2 class="h-top">{{ top_3_posts[1]['title'] }}</h2>
+          <p>{{ top_3_posts[1]['subtitle'] }}</p>
+          <p class="d-inline-block p-datetime">{{ top_3_posts[1]['date'] }}</p>
+          <p class="d-inline-block p-upvote"><i class="fa-solid fa-angle-up"></i> {{ top_3_posts[1]['upvote'] }}</p>
+        </a>
+        <a href="{{ url_for('single_post', post_id=top_3_posts[2]['id']) }}" class="col-lg-4 box-top">
+          <img src="data:image/jpg;base64, {{ top_3_posts[2]['image'] }}" class="d-block img-top">
+          <h2 class="h-top">{{ top_3_posts[2]['title'] }}</h2>
+          <p>{{ top_3_posts[2]['subtitle'] }}</p>
+          <p class="d-inline-block p-datetime">{{ top_3_posts[2]['date'] }}</p>
+          <p class="d-inline-block p-upvote"><i class="fa-solid fa-angle-up"></i> {{ top_3_posts[2]['upvote'] }}</p>
+        </a>
+      </div>
+    </div>
+  </section>
+  <hr>
+  <!-- Latest Section -->
+  <section id="latest">
+    <!-- Posts -->
+    <div class="container-fluid">
+      <h1 class="h-section">Latest</h1>
+      <div class="row align-items-center">
+        {% for post_data in posts_data %}
+          <a href="{{ url_for('single_post', post_id=post_data['id']) }}" class="col-lg-6 box-latest">
+            <div class="row">
+              <div class="col-8">
+                <h2 class="h-latest">{{ post_data['title'] }}</h2>
+<!--                <p>{{ post_data['subtitle'] }}</p>-->
+                <p class="d-inline-block p-datetime">{{ post_data['date'] }} | {{ post_data['time'] }}</p>
+                <p class="d-inline-block p-upvote"><i class="fa-solid fa-angle-up"></i> {{ post_data['upvote'] }}</p>
+              </div>
+              <div class="col-4 d-flex align-items-center">
+                <img src="data:image/jpg;base64, {{ post_data['image'] }}" class="d-block img-latest">
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+    <!-- Pagination -->
+    <div class="container-fluid con-pagination">
+      <nav aria-label="Page navigation" class="d-flex justify-content-center">
+        <ul class="pagination">
+          {% if page_no == 1 %}
+            <li class="page-item"><a class="page-link" href="{{ url_for('all_posts', page_no=page_no) }}">&laquo;</a></li>
+            <li class="page-item"><a class="page-link" href="{{ url_for('all_posts', page_no=page_no) }}"><strong>{{ page_no }}</strong></a></li>
+            <li class="page-item"><a class="page-link" href="{{ url_for('all_posts', page_no=page_no + 1) }}">{{ page_no + 1 }}</a></li>
+            <li class="page-item"><a class="page-link" href="{{ url_for('all_posts', page_no=page_no + 2) }}">{{ page_no + 2 }}</a></li>
+            <li class="page-item"><a class="page-link" href="{{ url_for('all_posts', page_no=page_no + 1) }}">&raquo;</a></li>
+          {% elif page_no == total_pages %}
+            <li class="page-item"><a class="page-link" href="{{ url_for('all_posts', page_no=page_no - 1) }}">&laquo;</a></li>
+            <li class="page-item"><a class="page-link" href="{{ url_for('all_posts', page_no=page_no - 2) }}">{{ page_no - 2 }}</a></li>
+            <li class="page-item"><a class="page-link" href="{{ url_for('all_posts', page_no=page_no - 1) }}">{{ page_no - 1 }}</a></li>
+            <li class="page-item"><a class="page-link" href="{{ url_for('all_posts', page_no=page_no) }}"><strong>{{ page_no }}</strong></a></li>
+            <li class="page-item"><a class="page-link" href="{{ url_for('all_posts', page_no=page_no) }}">&raquo;</a></li>
+          {% else %}
+            <li class="page-item"><a class="page-link" href="{{ url_for('all_posts', page_no=page_no - 1) }}">&laquo;</a></li>
+            <li class="page-item"><a class="page-link" href="{{ url_for('all_posts', page_no=page_no - 1) }}">{{ page_no - 1 }}</a></li>
+            <li class="page-item"><a class="page-link" href="{{ url_for('all_posts', page_no=page_no) }}"><strong>{{ page_no }}</strong></a></li>
+            <li class="page-item"><a class="page-link" href="{{ url_for('all_posts', page_no=page_no + 1) }}">{{ page_no + 1 }}</a></li>
+            <li class="page-item"><a class="page-link" href="{{ url_for('all_posts', page_no=page_no + 1) }}">&raquo;</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+  </section>
+</body>
+<footer id="footer">
+  <div class="container-fluid">
+    <a href="https://www.facebook.com/" target="_blank" class="link-footer"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="https://www.twitter.com/" target="_blank" class="link-footer"><i class="fa-brands fa-twitter"></i></a>
+    <a href="https://www.instagram.com/" target="_blank" class="link-footer"><i class="fa-brands fa-instagram"></i></a>
+    <p>Built by Cyrus Chan in 2022.</p>
+  </div>
+</footer>
+</html>

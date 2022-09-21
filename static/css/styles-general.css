@@ -1,0 +1,73 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3, h4, h5, p {
+  line-height: 1.5;
+}
+
+a {
+  transition: .2s ease-out;
+}
+
+a:link, a:visited, a:hover, a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  box-shadow: 0 0 0 1px;
+}
+
+/* Containers */
+
+.container-fluid {
+  padding: 5% 20%;
+}
+
+/* Title Section */
+
+#title .container-fluid {
+  padding: 3% 20% 7%;
+}
+
+.navbar {
+  padding-left: 0;
+}
+
+.navbar-brand {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+
+.nav-item {
+  margin-right: 1rem;
+}
+
+.row-title {
+  padding: 5% 0;
+}
+
+.h-title {
+  font-weight: 500;
+  font-size: 3rem;
+}
+
+.p-title {
+  font-size: 1.5rem;
+  margin-bottom: 5%;
+}
+
+/* Footer */
+
+#footer {
+  background-color: #413F42;
+  color: #fff;
+  text-align: center;
+}
+
+.link-footer {
+  padding: 1rem;
+  display: inline-block;
+}

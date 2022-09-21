@@ -1,0 +1,16 @@
+/* Title Section */
+
+#title {
+  background-image: url("../images/lenon-wall.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+
+/* Story Section */
+
+.p-story {
+  text-align: justify;
+  margin-bottom: 1rem;
+}

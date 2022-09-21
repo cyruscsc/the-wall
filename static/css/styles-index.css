@@ -1,0 +1,64 @@
+/* Title Section */
+
+#title {
+  background-image: url("../images/white-wall.jpg");
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Spotlight Section */
+
+.carousel-item {
+  text-align: center;
+}
+
+.img-lg-spotlight {
+  max-width: 100%;
+  max-height: 600px;
+  width: auto;
+  height: auto;
+}
+
+.text-soptlight {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.h-lg-spotlight {
+  font-size: 2rem;
+}
+
+.box-spotlight {
+  padding: 1rem 3rem;
+}
+
+.img-sm-spotlight {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.h-sm-spotlight {
+  font-size: 1.25rem;
+}
+
+.p-date {
+  color: #C8C6C6;
+  margin-right: 1rem;
+  margin-bottom: 0;
+}
+
+.p-upvote {
+  color: #C8C6C6;
+  margin-bottom: 0;
+}
+
+/* Media Query */
+
+@media (max-width: 991px) {
+  .box-spotlight {
+    text-align: center;
+  }
+}
