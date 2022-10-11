@@ -1,9 +1,11 @@
-import base64
 import requests
-import urllib.request
+import sqlite3
 from datetime import date
 from dateutil.relativedelta import relativedelta
 from random import randint
+
+connection = sqlite3.connect("../database.db")
+cursor = connection.cursor()
 
 RANDOM_TEXT_ENDPOINT = "https://baconipsum.com/api/"
 POST_DATE_START = "2022-06-01"
@@ -24,35 +26,48 @@ def generate_time() -> str:
     return f"{hh:02d}:{mm:02d}"
 
 
-def get_image(image_id: int):
-    """Get a random image and save it on the device."""
-    urllib.request.urlretrieve(url="https://picsum.photos/1200/800/", filename=f"posts_images/image-{image_id}.jpg")
-
-
-def encode_image(image_id: int) -> str:
-    """Encode the image to a base64 string."""
-    with open(file=f"posts_images/image-{image_id}.jpg", mode="rb") as image_file:
-        encoded_string = str(base64.b64encode(image_file.read())).strip("b'")
-    return encoded_string
-
-
 def generate_title() -> str:
-    """Generate random text for a title or a subtitle."""
+    """Generate random text for a title."""
     params = {
         "type": "meat-and-filler",
         "sentences": 1
     }
     response = requests.get(url=RANDOM_TEXT_ENDPOINT, params=params)
-    return response.json()[0]
+    title = response.json()[0]
+    if len(title) > 80:
+        title = title[:79]
+    else:
+        pass
+    return title
 
 
-def generate_paras() -> list:
+def generate_subtitle() -> str:
+    """Generate random text for a subtitle."""
+    params = {
+        "type": "meat-and-filler",
+        "sentences": 1
+    }
+    response = requests.get(url=RANDOM_TEXT_ENDPOINT, params=params)
+    subtitle = response.json()[0]
+    if len(subtitle) > 160:
+        subtitle = subtitle[:159]
+    else:
+        pass
+    return subtitle
+
+
+def generate_body() -> str:
     """Generate random text in five paragraphs."""
     params = {
         "type": "meat-and-filler"
     }
     response = requests.get(url=RANDOM_TEXT_ENDPOINT, params=params)
-    return response.json()
+    body = "".join([f"<p>{response.json()[n]}</p>" for n in range(5)])
+    if len(body) > 8000:
+        body = body[:7995] + "</p>"
+    else:
+        pass
+    return body
 
 
 def generate_upvote() -> int:
@@ -71,22 +86,26 @@ def generate_upvote() -> int:
             return randint(1, 500)
 
 
-posts_data = []
-for post_id in range(1, 34):
-    get_image(image_id=post_id)
-    post_data = {
+posts = []
+for post_id in range(1, 52):
+    post = {
         "id": post_id,
         "date": generate_date(),
         "time": generate_time(),
-        "image": encode_image(image_id=post_id),
+        "author": "testing_bot",
+        "img_url": f"https://picsum.photos/id/{post_id}/1200/800",
         "title": generate_title(),
-        "subtitle": generate_title(),
-        "content": generate_paras(),
+        "subtitle": generate_subtitle(),
+        "body": generate_body(),
         "upvote": generate_upvote()
     }
-    posts_data.append(post_data)
+    posts.append(post)
     print(f"Post {post_id} generated.")
 
-with open(file="posts_data.txt", mode="w") as data_file:
-    data_file.write(str(posts_data))
-print("All posts data saved.")
+data = []
+for post in posts:
+    row = tuple(post.values())
+    data.append(row)
+cursor.executemany("INSERT INTO post VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)", data)
+connection.commit()
+print("All posts saved to database.")
