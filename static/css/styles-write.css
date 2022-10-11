@@ -1,0 +1,31 @@
+/* Title Section */
+
+#title .container-fluid {
+  padding-bottom: 0;
+}
+
+/* Form Section */
+
+#write-form label {
+  margin: 0;
+}
+
+#write-form input {
+  width: 100%;
+  border: none;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+#write-form input:focus {
+  outline: none;
+}
+
+#write-form #input-title {
+  height: 2rem;
+  font-size: 2rem;
+}
+
+#write-form #cke_input-body {
+  margin-bottom: 1rem;
+}
